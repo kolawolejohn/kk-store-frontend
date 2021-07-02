@@ -7,7 +7,7 @@ const Product = (props) => {
   const [product, setProduct] = useState({});
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [error, setError] = useState(false);
-
+console.log(error);
   const loadSingleProduct = (productId) => {
     read(productId).then((data) => {
       if (data.error) {

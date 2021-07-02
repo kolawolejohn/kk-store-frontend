@@ -8,10 +8,10 @@ const Home = () => {
   const [productsBySell, setProductsBySell] = useState([]);
   const [productsByArrival, setProductsByArrival] = useState([]);
   const [error, setError] = useState(false);
-
+console.log(error);
   const loadProductsBySell = () => {
     getProducts("sold").then((data) => {
-      if (data.error) {
+      if (data && data.error) {
         setError(data.error);
       } else {
         setProductsBySell(data);
@@ -21,7 +21,7 @@ const Home = () => {
 
   const loadProductsByArrival = () => {
     getProducts("createdAt").then((data) => {
-      if (data.error) {
+      if (data && data.error) {
         setError(data.error);
       } else {
         setProductsByArrival(data);
@@ -43,7 +43,7 @@ const Home = () => {
       <Search />
       <h2 className="mb-4">Best Sellers</h2>
       <div className="row">
-        {productsBySell.map((product, index) => (
+        {productsBySell && productsBySell.map((product, index) => (
           <div className="col-4 mb-3">
             <Card key={index} product={product} />
           </div>
@@ -51,7 +51,7 @@ const Home = () => {
       </div>
       <h2 className="mb-4">New Arrivals</h2>
       <div className="row">
-        {productsByArrival.map((product, index) => (
+        {productsByArrival && productsByArrival.map((product, index) => (
           <div key={index} className="col-4 mb-3">
             <Card key={index} product={product} />
           </div>

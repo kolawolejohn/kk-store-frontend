@@ -16,10 +16,10 @@ const Shop = () => {
   const [skip, setSkip] = useState(0);
   const [filteredResults, setFilteredResults] = useState([]);
   const [size, setSize] = useState(0);
-
+console.log(error, setLimit);
   const init = () => {
     getCategories().then((data) => {
-      if (data.error) {
+      if (data && data.error) {
         setError(data.error);
       } else {
         setCategories(data);
@@ -30,9 +30,9 @@ const Shop = () => {
   const loadFilteredResults = (newFilters) => {
     //console.log(newFilters);
     getFilteredProducts(skip, limit, newFilters).then((data) => {
-      if (data.error) {
+      if (data && data.error) {
         setError(data.error);
-      } else {
+      } else if (data){
         setFilteredResults(data.data);
         setSize(data.size);
         setSkip(0);
@@ -44,7 +44,7 @@ const Shop = () => {
     //console.log(newFilters);
     let toSkip = skip + limit;
     getFilteredProducts(toSkip, limit, myFilters.filters).then((data) => {
-      if (data.error) {
+      if (data && data.error) {
         setError(data.error);
       } else {
         setFilteredResults([...filteredResults, ...data.data]);

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-    getProducts,
     getBraintreeClientToken,
     processPayment,
     createOrder
 } from "./apiCore";
 import { emptyCart } from "./cartHelpers";
-import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
@@ -26,10 +24,12 @@ const Checkout = ({ products }) => {
 
     const getToken = (userId, token) => {
         getBraintreeClientToken(userId, token).then(data => {
-            if (data.error) {
+            if (data && data.error) {
                 setData({ ...data, error: data.error });
             } else {
+                if (data && data.clientToken) {
                 setData({ clientToken: data.clientToken });
+                }
             }
         });
     };
@@ -65,7 +65,7 @@ const Checkout = ({ products }) => {
         // send the nonce to your server
         // nonce = data.instance.requestPaymentMethod()
         let nonce;
-        let getNonce = data.instance
+        data.instance
             .requestPaymentMethod()
             .then(data => {
                 // console.log(data);

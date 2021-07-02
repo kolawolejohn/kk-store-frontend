@@ -7,6 +7,7 @@ const AdminDashboard = () => {
   const {
     user: { _id, name, email, role },
   } = isAuthenticated();
+  console.log(_id)
 
   const adminLinks = () => {
     return (

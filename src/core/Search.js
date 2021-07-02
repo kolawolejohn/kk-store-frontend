@@ -16,7 +16,7 @@ const Search = () => {
 
   const loadCategories = () => {
     getCategories().then((data) => {
-      if (data.error) {
+      if (data && data.error) {
         console.log(data.error);
       } else {
         setData({ ...data, categories: data });
@@ -77,7 +77,8 @@ const Search = () => {
           <div className="input-group-prepend">
             <select className="btn mr-2" onChange={handleChange("category")}>
               <option value="All">All</option>
-              {categories.map((category, index) => (
+              
+              {categories && categories.map((category, index) => (
                 <option key={index} value={category._id}>
                   {category.name}
                 </option>

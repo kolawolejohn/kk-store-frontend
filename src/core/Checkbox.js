@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Checkbox = ({ categories, handleFilters }) => {
     const [checked, setCheked] = useState([]);
@@ -19,7 +19,7 @@ const Checkbox = ({ categories, handleFilters }) => {
         handleFilters(newCheckedCategoryId);
     };
 
-    return categories.map((c, i) => (
+    let result = categories && categories.map((c, i) => (
         <li key={i} className="list-unstyled">
             <input
                 onChange={handleToggle(c._id)}
@@ -30,6 +30,7 @@ const Checkbox = ({ categories, handleFilters }) => {
             <label className="form-check-label">{c.name}</label>
         </li>
     ));
+    return result ? result : null
 };
 
 export default Checkbox;
