@@ -24,7 +24,7 @@ const Signin = () => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
     signin({ email, password }).then((data) => {
-      if (data.error) {
+      if (data && data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
         authenticate(data, () => {
